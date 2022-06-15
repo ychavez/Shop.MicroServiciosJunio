@@ -23,5 +23,13 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "8001:80"
+    container_name: "basket.api"
+    depends_on:
+      - "basketdb"
+
+  basketdb:
+    container_name: "basketdb"
+    ports:
+      -  "6379:6379"
 
       
