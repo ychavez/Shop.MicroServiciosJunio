@@ -4,6 +4,7 @@ services:
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=mongodb://catalogdb:27017"
     ports:
       - "8000:80"
     depends_on:
@@ -21,6 +22,7 @@ services:
   basket.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings__ConnectionString=basketdb:6379"
     ports:
       - "8001:80"
     container_name: "basket.api"
