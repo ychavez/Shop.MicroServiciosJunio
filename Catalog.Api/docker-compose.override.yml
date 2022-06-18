@@ -18,6 +18,7 @@ services:
     volumes:
      - "mongo_data:/data/db"  
      
+     
 
   basket.api:
     environment:
@@ -34,4 +35,10 @@ services:
     ports:
       -  "6379:6379"
 
-      
+  orderdb:
+   container_name: "orderdb"
+   environment:
+       SA_PASSWORD: "Passw0rd23"
+       ACCEPT_EULA: "Y"
+   ports:
+     - "1433:1433"

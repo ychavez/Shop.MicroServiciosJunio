@@ -18,6 +18,9 @@ services:
     build:
       context: ..
       dockerfile: Basket.Api/Dockerfile
+  
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
 
 volumes:
   mongo_data:
