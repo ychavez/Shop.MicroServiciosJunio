@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Ordering.Application;
+using Ordering.Application.Contracts;
+using Ordering.Infraestructure.Persistence;
+using Ordering.Infraestructure.Repositories;
 
 namespace Ordering.Api
 {
@@ -14,6 +18,11 @@ namespace Ordering.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+           
+            builder.Services.AddDbContext<OrderContext>(options =>
+              options.UseSqlServer(builder.Configuration.GetConnectionString("OrderingConnectionString")));
+            //Repositorio
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             builder.Services.AddApplicationServices();
 

@@ -56,7 +56,8 @@ namespace Ordering.Infraestructure.Repositories
         }
 
         public async Task<IReadOnlyList<T>> GetAsync(int offset, int limit,
-            Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Expression<Func<T, bool>> predicate = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             params string[] includeStrings)
         {
             IQueryable<T> query = orderContext.Set<T>();

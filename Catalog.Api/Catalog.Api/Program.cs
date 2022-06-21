@@ -1,6 +1,6 @@
 using Catalog.Api.Data;
 using Catalog.Api.Repositories;
-using Ordering.Application;
+
 
 namespace Catalog.Api
 {
