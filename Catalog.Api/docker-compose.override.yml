@@ -42,3 +42,20 @@ services:
        ACCEPT_EULA: "Y"
    ports:
      - "1433:1433"
+ 
+  ordering.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Passw0rd23
+    ports:
+      - "8002:80"
+    container_name: ordering.api
+    depends_on:
+      - orderdb
+      - rabbitmq
+
+  rabbitmq:
+   container_name: rabbitmq
+   ports:
+    - "5672:5672"
+    - "15672:15672"

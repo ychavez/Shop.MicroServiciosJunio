@@ -1,4 +1,5 @@
 using Basket.Api.Repositories;
+using MassTransit;
 
 namespace Basket.Api
 {
@@ -14,13 +15,28 @@ namespace Basket.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-           
+
             builder.Services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
             });
 
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+            ///masstransit--rabbit
+            builder.Services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+                });
+            });
+
+            builder.Services.AddMassTransitHostedService();
+
+
+            //agregar automapper
+            builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 

@@ -8,7 +8,9 @@ namespace Ordering.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Order, OrdersViewModel>().ReverseMap();
+            CreateMap<Order, OrdersViewModel>()
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
+
         }
     }
 }
