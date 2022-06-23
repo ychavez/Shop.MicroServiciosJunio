@@ -3,3 +3,17 @@
 ################################################################################
 
 /Basket.Api
+/.vs
+/EventBus.Messages
+/MyFirstBlazorApp
+/MyFisrstBlazorApp
+/Ordering.Api/bin/Debug/net6.0
+/Ordering.Application
+/Ordering.Api/obj
+/Ordering.Domain
+/Ordering.Infraestructure
+/SQLVsLinQ
+/SqlVsLinqTest
+/Authentication.Api/bin/Debug/net6.0
+/Authentication.Api/obj
+/Authentication.Api/Properties
