@@ -6,6 +6,7 @@ using Ordering.Application.Features.Orders.Queries.GetOrdersList;
 namespace Ordering.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class OrderController : ControllerBase
     {
@@ -17,11 +18,11 @@ namespace Ordering.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<OrdersViewModel>>> GetOrders([FromQuery] string userName)
         {
             var query = new GetOrdersListQuery(userName);
             return await mediator.Send(query);
         }
+
     }
 }

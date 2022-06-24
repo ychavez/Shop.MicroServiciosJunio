@@ -2,6 +2,7 @@
 using Basket.Api.Entities;
 using Basket.Api.Repositories;
 using EventBus.Messages.Events;
+using Existence.Grpc.Protos;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,22 @@ namespace Basket.Api.Controllers
         private readonly IBasketRepository basketRepository;
         private readonly IPublishEndpoint publishEndpoint;
         private readonly IMapper mapper;
+        private readonly ExistenceService.ExistenceServiceClient client;
 
-        public BasketController(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint,
-            IMapper mapper)
+        public BasketController(IBasketRepository basketRepository, 
+            IPublishEndpoint publishEndpoint,
+            IMapper mapper,
+            ExistenceService.ExistenceServiceClient client)
         {
             this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
             this.publishEndpoint = publishEndpoint;
             this.mapper = mapper;
+            this.client = client;
         }
+
+        [HttpGet("TestGrpc")]
+        public ActionResult<int> testGrpc() 
+            => client.CheckExistence(new ProductRequest { Id = "algo" }).ProductQty;
 
         [HttpGet("{userName}")]
         public async Task<ActionResult<ShoppingCart>> GetBasket(string userName)

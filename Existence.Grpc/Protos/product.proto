@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Existence.Grpc.Protos";
+
+service ExistenceService
+{
+	rpc CheckExistence (ProductRequest) returns (ProductExistenceReply);
+}
+
+message ProductRequest
+{
+	string id = 1;
+}
+
+message ProductExistenceReply 
+{
+	int32 ProductQty = 1;
+}
+
+
